@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Entrance | OVC TECH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        /* Base Styles */
+        :root {
+            --maroon: #5a0000;
+            --light-maroon: #8b0000;
+            --gold: #ffcc00;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--light-gray);
+            overflow-x: hidden;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Header Section */
+        .university-header {
+            background: linear-gradient(135deg, var(--maroon), #3a0000);
+            color: var(--white);
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .university-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+        }
+        
+        .university-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+        }
+        
+        .university-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        /* University Entrance Section */
+        .university-entrance {
+            padding: 60px 20px;
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--maroon);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+            animation: fadeIn 1s ease;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--maroon);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 15px auto 0;
+        }
+        
+        /* Students Container */
+        .students-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Student Card */
+        .student-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: calc(var(--delay) * 0.1s);
+            border: 1px solid rgba(90, 0, 0, 0.1);
+        }
+        
+        .student-card.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .student-card:hover {
+            transform: translateY(-10px) !important;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .student-img-container {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+        }
+        
+        .student-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .student-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .university-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--maroon);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .student-card:hover .university-badge {
+            transform: scale(1.1) rotate(15deg);
+            background: var(--light-maroon);
+        }
+        
+        .student-info {
+            padding: 20px;
+            position: relative;
+        }
+        
+        .student-info h3 {
+            font-size: 1.4rem;
+            color: var(--maroon);
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .student-card:hover .student-info h3 {
+            color: var(--light-maroon);
+        }
+        
+        .student-info p {
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .student-info p strong {
+            color: var(--maroon);
+            font-weight: 600;
+        }
+        
+        .student-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--maroon), var(--light-maroon));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .student-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--maroon), #3a0000);
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .stat-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 30px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Call to Action */
+        .cta-section {
+            background-color: var(--white);
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.2rem;
+            color: var(--maroon);
+            margin-bottom: 20px;
+        }
+        
+        .cta-content p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--maroon);
+            color: var(--white);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--maroon);
+            box-shadow: 0 4px 15px rgba(90, 0, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: transparent;
+            color: var(--maroon);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(90, 0, 0, 0.4);
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgb(95, 11, 11);
+            color: var(--white);
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+        
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #bbb;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--gold);
+            color: #222;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .university-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .students-container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+               
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .university-header {
+                padding: 60px 20px 40px;
+            }
+            
+            .university-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .student-img-container {
+                height: 180px;
+                
+                
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="university-header">
+        <h1 class="animate__animated animate__fadeInDown">University Entrance Achievements</h1>
+        <p class="animate__animated animate__fadeIn">Celebrating our students' success in gaining admission to prestigious universities</p>
+    </header>
+
+    <!-- University Entrance Section -->
+    <section class="university-entrance">
+        <div class="section-title">
+            <h2>Our Successful Students</h2>
+            <p>Meet our outstanding students who have secured placements in top universities across the country</p>
+        </div>
+        
+        <div class="students-container">
+            <!-- Student 1 -->
+            <div class="student-card " style="--delay: 1">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/piranith.jpg" alt="John Doe">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>S.Piranith</S></h3>
+                    <p><strong>University:</strong>  University of Sri Jayewardenepura</p>
+                    <p><strong>Course:</strong>  Information  Communication Technology</p>
+                    <p><strong>Year:</strong>  2020</p>
+                </div>
+            </div>
+            
+            <!-- Student 2 -->
+            <div class="student-card" style="--delay: 2">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/pathmarubi2.jpg" alt="Jane Smith">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>K.Pathmarubini</h3>
+                    <p><strong>University:</strong>  Ocean University of Colombo</p>
+                    <p><strong>Course:</strong>  Sea Food Technology</p>
+                    <p><strong>Year:</strong>  2020</p>
+                </div>
+            </div>
+            
+            <!-- Student 3 -->
+            <div class="student-card" style="--delay: 3">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/nasi.jpg" alt="Michael Lee">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>U.Nasikethan</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2021</p>
+                </div>
+            </div>
+            
+            <!-- Student 4 -->
+            <div class="student-card" style="--delay: 4">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/karan.jpg" alt="Sarah Wilson">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>T.Thurshanthan</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Engineering Technology</p>
+                    <p><strong>Year:</strong>  2021</p>
+                </div>
+            </div>
+            
+            <!-- Student 5 -->
+            <div class="student-card" style="--delay: 5">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/rakshana.2jpg.jpg" alt="David Brown">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>V.Rakshana</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2021</p>
+                </div>
+            </div>
+            
+            <!-- Student 6 -->
+            <div class="student-card" style="--delay: 6">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/anu.jpg" alt="Emma Johnson">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>M.Anushiya</h3>
+                    <p><strong>University:</strong>  University of Colombo</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2022</p>
+                </div>
+            </div>
+            
+            <!-- Student 7 -->
+            <div class="student-card" style="--delay: 7">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/pavi.jpg" alt="Robert Taylor">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>T.Pavithra</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2022</p>
+                </div>
+            </div>
+            
+            <!-- Student 8 -->
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/shanu.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>P.Shanukshi</h3>
+                    <p><strong>University:</strong>  University ofJaffna</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2022</p>
+                </div>
+            </div>
+
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/thavarukshan.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>A.Thavarukshan</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2022</p>
+                </div> 
+            </div>
+
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/mira.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>S.Mirarthan</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2022</p>
+                </div>
+            </div>
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/tharshi.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>T.Tharshika</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2022</p>
+                </div>
+            </div>
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/arawinth.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>P.Arwinth</h3>
+                    <p><strong>University:</strong>  University of Vavuniya</p>
+                    <p><strong>Course:</strong>  Information  Communication Technology</p>
+                    <p><strong>Year:</strong>  2022</p>
+                </div>
+            </div>
+
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/gogi.JPG" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>K.Gohethan</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Engineering Technology</p>
+                    <p><strong>Year:</strong>  2022</p>
+                </div>
+            </div>
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/vithushan.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>K.Vithushan</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Engineering Technology</p>
+                    <p><strong>Year:</strong>  2022</p>
+                </div>
+            </div>
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/kanu.JPG" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>M.Kanushan</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Engineering Technology</p>
+                    <p><strong>Year:</strong>  2022</p>
+                </div>
+            </div>
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/tharshi2.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>Y.Tharshika</h3>
+                    <p><strong>University:</strong>  University of Uva Wellassa</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2023</p>
+                </div>
+            </div>
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/rasi.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>R.Rashika</h3>
+                    <p><strong>University:</strong>  University of South Eastern</p>
+                    <p><strong>Course:</strong>  Information  Communication Technology</p>
+                    <p><strong>Year:</strong>  2023</p>
+                </div>
+            </div>
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/kisha.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>A.Kishamecktalin</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2023</p>
+                </div>
+            </div>
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/vithu.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>T.Vithusraj</h3>
+                    <p><strong>University:</strong>  University of Uva Wellassa</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2023</p>
+                </div>
+            </div>
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/sathu2.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>T.Sathusan</h3>
+                    <p><strong>University:</strong>  University of Vavuniya</p>
+                    <p><strong>Course:</strong>  Information  Communication Technology</p>
+                    <p><strong>Year:</strong>  2023</p>
+                </div>
+            </div>
+
+            <div class="student-card" style="--delay: 8">
+                <div class="student-img-container">
+                    <img src="/uni stu/croped img/silow.jpg" alt="Olivia Martinez">
+                    <div class="university-badge"><i class="fas fa-university"></i></div>
+                </div>
+                <div class="student-info">
+                    <h3>M.Danuskan</h3>
+                    <p><strong>University:</strong>  University of Jaffna</p>
+                    <p><strong>Course:</strong>  Bio System Technology</p>
+                    <p><strong>Year:</strong>  2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="section-title">
+            <h2 style="color: var(--white)">Our University Entrance Success</h2>
+            <p style="color: rgba(255,255,255,0.8)">Numbers that speak for themselves</p>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+                <div class="stat-number">1200+</div>
+                <div class="stat-label">Students Placed</div>
+            </div>
+            
+            <div class="stat-box">
+                <div class="stat-icon"><i class="fas fa-university"></i></div>
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Universities</div>
+            </div>
+            
+            <div class="stat-box">
+                <div class="stat-icon"><i class="fas fa-book"></i></div>
+                <div class="stat-number">25+</div>
+                <div class="stat-label">Courses</div>
+            </div>
+            
+            <div class="stat-box">
+                <div class="stat-icon"><i class="fas fa-award"></i></div>
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Start Your University Journey With Us</h2>
+            <p>Join our technology unit and become part of our success story. We provide the guidance and resources you need to secure your place at top universities.</p>
+            <a href="#" class="cta-button">Apply Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>OVC TECH</h3>
+                <p>The Technology Unit of T/Orrshil Vivekananda College, dedicated to excellence in technical education and university placements.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="/home/index.html">Home</a>
+                <a href="/about/about.html">About Us</a>
+                <a href="/uni entrance/uni.html">University Entrance</a>
+                <a href="/our projects/test.html">Our Projects</a>
+                <a href="/our events/events.html">Events</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Trincomalee, Sri Lanka</p>
+                <p><i class="fas fa-phone"></i> +94 123 456 789</p>
+                <p><i class="fas fa-envelope"></i> contact@ovctech.edu</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 OVC TECH  All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Animate student cards on scroll
+            const studentCards = document.querySelectorAll('.student-card');
+            
+            const animateCards = () => {
+                studentCards.forEach(card => {
+                    const cardTop = card.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (cardTop < windowHeight - 100) {
+                        card.classList.add('show');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', animateCards);
+            animateCards(); // Initialize
+            
+            // Animate stats on scroll
+            const statBoxes = document.querySelectorAll('.stat-box');
+            const statsSection = document.querySelector('.stats-section');
+            let statsAnimated = false;
+            
+            const animateStats = () => {
+                const sectionTop = statsSection.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight - 200 && !statsAnimated) {
+                    statBoxes.forEach((box, index) => {
+                        setTimeout(() => {
+                            box.style.opacity = '1';
+                            box.style.transform = 'translateY(0)';
+                        }, index * 150);
+                    });
+                    statsAnimated = true;
+                }
+            };
+            
+            window.addEventListener('scroll', animateStats);
+            animateStats(); // Initialize
+        });
+    </script>
+</body>
+</html>

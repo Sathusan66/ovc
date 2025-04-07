@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Garden System - Vivekananda College Technology Stream</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #800020; /* Maroon */
+            --secondary-color: #ffffff; /* White */
+            --accent-color: #ffd700; /* Gold for accents */
+            --text-color: #333333;
+            --light-maroon: #a04060;
+            --dark-maroon: #600018;
+            --garden-green: #2e8b57;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-maroon));
+            color: var(--secondary-color);
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header {
+            background: 
+                        url("1.jpg");
+            color: var(--secondary-color);
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInDown 1s ease-out;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .leaf-decoration {
+            position: absolute;
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .leaf-1 {
+            top: 20px;
+            left: 5%;
+            font-size: 5rem;
+            animation: float 8s infinite ease-in-out;
+            color: var(--garden-green);
+        }
+
+        .leaf-2 {
+            bottom: 30px;
+            right: 8%;
+            font-size: 6rem;
+            animation: float 10s infinite ease-in-out 2s;
+            color: var(--garden-green);
+        }
+
+        .leaf-3 {
+            top: 40%;
+            left: 15%;
+            font-size: 4rem;
+            animation: swing 12s infinite ease-in-out;
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .intro-section h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .intro-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .intro-section p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Garden Gallery */
+        .gallery-section {
+            margin: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .gallery-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            aspect-ratio: 4/3;
+            background-color: var(--primary-color);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.1);
+            opacity: 0.7;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: var(--secondary-color);
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .caption-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .caption-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .garden-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid var(--garden-green);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--garden-green);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--primary-color);
+        }
+
+        .feature-title {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        
+        /* Footer */
+        .footer {
+            background: rgb(95, 11, 11);
+            color: var(--white);
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+        
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #bbb;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--gold);
+            color: #222;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+        /* Color Theme */
+        :root {
+            --maroon: #800000;
+            --dark-maroon: #5a0000;
+            --light-maroon: #a00000;
+            --white: #ffffff;
+            --off-white: #f9f9f9;
+            --light-gray: #f0f0f0;
+            --dark-text: #333333;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes swing {
+            0%, 100% {
+                transform: rotate(-5deg);
+            }
+            50% {
+                transform: rotate(5deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .leaf-decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <i class="fas fa-leaf leaf-decoration leaf-1"></i>
+        <i class="fas fa-seedling leaf-decoration leaf-2"></i>
+        <i class="fas fa-spa leaf-decoration leaf-3"></i>
+        <div class="header-content">
+            <h1>Our Garden System</h1>
+            <p class="subtitle">Vivekananda College Technology Stream - Trincomalee</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro-section">
+            <h2>Cultivating Innovation & Sustainability</h2>
+            <p>Our Technology Stream Garden is a living laboratory where students combine technology with nature to create sustainable solutions. Explore our green initiatives that blend agricultural science with modern technology.</p>
+        </section>
+
+        <section class="gallery-section">
+            <h2 class="section-title">Garden Gallery</h2>
+            <p class="gallery-description">Discover the beauty and innovation of our technology-integrated garden system through these captivating images.</p>
+            
+            <div class="gallery-grid">
+                <!-- Garden Item 1 -->
+                <div class="gallery-item">
+                    <img src="/garden/2.jpg" alt="Hydroponic System" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+                
+                <!-- Garden Item 2 -->
+                <div class="gallery-item">
+                    <img src="/garden/3.jpg" alt="Solar Powered Irrigation" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+                
+                <!-- Garden Item 3 -->
+                <div class="gallery-item">
+                    <img src="/garden/4.jpg" alt="Vertical Garden" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+                
+                <!-- Garden Item 4 -->
+                <div class="gallery-item">
+                    <img src="/garden/5.jpg" alt="Composting Unit" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+                
+                <!-- Garden Item 5 -->
+                <div class="gallery-item">
+                    <img src="/garden/6.jpg" alt="Student Gardeners" class="gallery-image">
+                    <div class="gallery-caption">
+                       
+                    </div>
+                </div>
+                
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/7.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/8.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/9.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/10.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/11.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/12.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/13.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/14.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/15.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/16.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/17.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/18.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/19.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/20.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/21.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/22.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/23.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/24.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/25.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/26.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/27.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                </div>
+
+                <!-- Garden Item 6 -->
+                <div class="gallery-item">
+                    <img src="/garden/28.jpg" alt="Harvest Day" class="gallery-image">
+                    <div class="gallery-caption">
+                        
+                    </div>
+                    
+                </div>
+
+               
+            </div>
+            
+            
+        </section>
+    </main>
+
+     <!-- Footer -->
+     <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>OVC TECH</h3>
+                <p>The Technology Unit of T/Orrshil Vivekananda College, dedicated to excellence in technical education and university placements.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="/home/index.html">Home</a>
+                <a href="/about/about.html">About Us</a>
+                <a href="/uni entrance/uni.html">University Entrance</a>
+                <a href="/our projects/test.html">Our Projects</a>
+                <a href="/our events/events.html">Events</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Trincomalee, Sri Lanka</p>
+                <p><i class="fas fa-phone"></i> +94 123 456 789</p>
+                <p><i class="fas fa-envelope"></i> contact@ovctech.edu</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 OVC TECH. All Rights Reserved.
+        </div>
+    </footer>
+    <script>
+        // Animate gallery items as they come into view
+        function animateGalleryItems() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            galleryItems.forEach(item => {
+                // Random delay for staggered animation
+                item.style.transitionDelay = `${Math.random() * 0.5}s`;
+                observer.observe(item);
+            });
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            animateGalleryItems();
+            
+            // Add hover effect to feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'all 0.3s ease';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

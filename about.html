@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivekananda College - Technology Stream</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+
+        /* Base Styles */
+        :root {
+            --maroon: #5a0000;
+            --light-maroon: #8b0000;
+            --gold: #ffcc00;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+        }
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: white;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(95, 11, 11, 0.9), rgba(95, 0, 0, 0.8));
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            animation: fadeInDown 1s ease;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+            
+        }
+        
+        .logo {
+            height: 120px;
+            margin-right: 15px;
+            animation: pulse 2s infinite;
+        }
+        
+        .header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Navigation */
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid maroon;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: maroon;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: maroon;
+            border-radius: 3px;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        /* History Section */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 2rem auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: maroon;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -12px;
+            background-color: white;
+            border: 4px solid maroon;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .right::after {
+            left: -12px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(128, 0, 0, 0.1);
+        }
+        
+        .timeline-content h3 {
+            color: maroon;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Video Section */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-container:hover {
+            transform: scale(1.02);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Tech Unit Details */
+        .units-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .unit-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-top: 4px solid maroon;
+        }
+        
+        .unit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .unit-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .unit-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .unit-card:hover .unit-img img {
+            transform: scale(1.1);
+        }
+        
+        .unit-content {
+            padding: 1.5rem;
+        }
+        
+        .unit-content h3 {
+            color: maroon;
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .unit-content p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .unit-content ul {
+            margin-left: 1.5rem;
+            color: #555;
+        }
+        
+     /* Footer */
+     .footer {
+            background: rgb(95, 11, 11);
+            color: var(--white);
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+        
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #bbb;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--gold);
+            color: #222;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border-radius: 50px;
+            padding: 10px 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+            border: 2px solid maroon;
+        }
+        
+        .music-player button {
+            background: maroon;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .music-player button:hover {
+            transform: scale(1.1);
+            background: #600;
+        }
+        
+        .music-info {
+            font-size: 0.9rem;
+            color: maroon;
+            font-weight: 500;
+        }
+        
+        /* Scroll Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background-color: maroon;
+            z-index: 1000;
+            transition: width 0.1s ease;
+        }
+        
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .left::after, .right::after {
+                left: 18px;
+            }
+            
+            .right {
+                left: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .header-content h1 {
+                font-size: 2rem;
+            }
+            
+            .units-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+      
+
+/* Hover Effect - Remove Blur */
+.hero:hover .showcase-video {
+    filter: blur(0px);
+}
+/* Showcase Video Styling */
+.hero {
+    position: relative;
+    width: 100%;  /* Adjust width (e.g., 50%, 70%, or px) */
+    height: 100%; /* Adjust height (e.g., auto, 300px, 500px) */
+    
+    overflow: hidden;
+    border-radius: 0px;
+    
+}
+
+.hero video {
+    width: 100%;
+    height: 500px;
+    object-fit: cover; /* Ensures video covers the container */
+    display: block;
+    filter: blur(1px); /* Initial blur */
+    transition: filter 0.5s ease-in-out;
+}
+
+/* Hover Effect - Remove Blur */
+.hero video-container:hover .showcase-video {
+    filter: blur(0px);
+}
+/* Updated Foundation Video Section */
+#video {
+    text-align: center;
+    padding: 2rem;
+}
+
+#video h2 {
+    margin-bottom: 1.5rem;
+}
+
+#video p {
+    margin-bottom: 2rem;
+}
+
+.found {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    aspect-ratio: 16/9; /* Maintain 16:9 aspect ratio */
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    overflow: hidden;
+}
+
+.found:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    border-color: maroon;
+    border-radius: 0; /* Remove border radius on hover for a different effect */
+    filter: brightness(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #video {
+        padding: 1rem;
+    }
+    
+    .found {
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .found {
+        border-radius: 6px;
+    }
+}
+       
+
+
+
+
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress"></div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <img src="/img/T_Orr's Hill Vivekananda College 40th profile pic.png" alt="College Logo" class="logo">
+            <div class="header-content">
+                <h1>Vivekananda College - Technology Stream</h1>
+                <p>Orrs Hill, Trincomalee, Sri Lanka</p>
+            </div>
+        </div>
+
+        
+    </header>
+    
+    <!-- video-->
+    <div class="hero">
+        <video autoplay muted loop playsinline>
+            <source src="/video/6th year.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+    </div>
+
+   
+    
+ 
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- About Section -->
+        <section id="about">
+            <h2>About Our Technology Stream</h2> <p>Welcome to the Technology Stream of Vivekananda College, Trincomalee. Our stream was established with the vision of providing quality technological education to students in the Eastern Province of Sri Lanka.</p>
+            <p>The foundation stone for our Technology Unit was proudly laid on 02.02.2017 by R. Sampanthan MP and K. Thurairetnasingham MP, symbolizing the beginning of a new era in technology education at T/Orr’s Hill Vivekananda College. Officially opened on 01.03.2019 by Mr. K. Thurairetnasingham MP during the leadership of our honorable principal Mr. K. Ravithas, our unit started with only basic lab equipment but filled with big dreams. Despite limited resources, our passion, dedication, and the unwavering support of our teachers led us to remarkable achievements. From small facilities, we grew steadily, producing impactful, innovative projects and reaching significant milestones, including an inspiring growth in university entrances. Our journey is proof that greatness begins with a single step, and determination can turn small beginnings into powerful success stories.</p>
+           
+            <p>We offer a comprehensive curriculum that combines theoretical knowledge with practical applications, preparing students for higher education and careers in various technology fields.</p>
+           
+        </section>
+        
+        <!-- History Section -->
+        <section id="history">
+            <h2>Our History</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Foundation Laid</h3>
+                        <p>February 02, 2017</p>
+                        <p>The Technology Stream was officially approved by the Ministry of Education, marking the beginning of a new era in technical education in Trincomalee.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>First Intake</h3>
+                        <p>June 12, 2017</p>
+                        <p>We welcomed our first batch  students to the Technology Stream, with three dedicated Teachers.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>New Building</h3>
+                        <p>March 01, 2019</p>
+                        <p>A new dedicated building for the Technology Stream was inaugurated with modern facilities.</p>
+                    </div>
+                </div>
+
+                
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>First Laboratory</h3>
+                        <p>March 01, 2019</p>
+                        <p>From limited resources to great achievements — our Technology Unit thrives on innovation and determination. </p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>Our First University Entrance </h3>
+                        <p>2020</p>
+                        <p>Our journey to higher education began in 2020 our first proud university entrance from the Technology Unit.</p>
+                    </div>
+                </div>
+               
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>Expansion</h3>
+                        <p>November 2018</p>
+                        <p>The stream expanded to include more specialized units and increased student intake to 75 per year.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+        
+        <!-- Foundation Video -->
+        <section id="video">
+            <h2>Foundation Ceremony</h2>
+            <p>Watch the memorable moments from our Technology Stream foundation ceremony:</p>
+            <video autoplay muted loop playsinline class="found">
+                <source src="/video/foundation.mp4"  type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+    
+        </section>
+        
+        <!-- Technology Units -->
+        <section id="units">
+            <h2>Our Technology Units</h2>
+            <p>The Technology Stream at Vivekananda College offers comprehensive education through the following specialized units:</p>
+            
+            <div class="units-container">
+                <!-- Unit 1 -->
+                <div class="unit-card">
+                    <div class="unit-img">
+                        <img src="https://via.placeholder.com/400x200?text=Engineering+Technology" alt="Engineering Technology">
+                    </div>
+                    <div class="unit-content">
+                        <h3>Engineering Technology</h3>
+                        <p>Focuses on mechanical and civil engineering principles with practical applications.</p>
+                        <ul>
+                            <li>Mechanical Systems</li>
+                            <li>Structural Design</li>
+                            <li>Materials Technology</li>
+                            <li>Engineering Drawing</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Unit 2 -->
+                <div class="unit-card">
+                    <div class="unit-img">
+                        <img src="https://via.placeholder.com/400x200?text=Biosystems+Technology" alt="Biosystems Technology">
+                    </div>
+                    <div class="unit-content">
+                        <h3>Biosystems Technology</h3>
+                        <p>Combines biological sciences with technology for agricultural and environmental applications.</p>
+                        <ul>
+                            <li>Agricultural Technology</li>
+                            <li>Food Processing</li>
+                            <li>Environmental Systems</li>
+                            <li>Biotechnology</li>
+                        </ul>
+                    </div>
+                </div>
+                
+               
+                
+                <!-- Unit 4 -->
+                <div class="unit-card">
+                    <div class="unit-img">
+                        <img src="https://via.placeholder.com/400x200?text=Science+for+Technology" alt="Science for Technology">
+                    </div>
+                    <div class="unit-content">
+                        <h3>Science for Technology</h3>
+                        <p>Provides the scientific foundation for all technology disciplines.</p>
+                        <ul>
+                            <li>Applied Physics</li>
+                            <li>Applied Chemistry</li>
+                            <li>Applied Mathematics</li>
+                            <li>Technical English</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Achievements -->
+        <section id="achievements">
+            <h2>Our Achievements</h2>
+            <p>Since its inception, our Technology Stream has achieved remarkable success:</p>
+            <ul style="margin-left: 2rem;">
+                <li>Consistently high pass rates in G.C.E. Advanced Level Examinations</li>
+                <li>Numerous district and national awards in technology competitions</li>
+                <li>Successful university placements for our graduates</li>
+                <li>Industry partnerships for student internships and training</li>
+                <li>Recognition as a center of excellence for technology education in the Eastern Province</li>
+            </ul>
+        </section>
+    </div>
+
+ <!-- Responsive Chart Container -->
+<div style="width: 90%; max-width: 800px; margin: 2rem auto; text-align: center;">
+    <h2 style="color: maroon; font-size: clamp(1.5rem, 4vw, 2rem); font-weight: bold; margin-bottom: 1rem;">
+        T/Orr's Hill Vivekananda College
+    </h2>
+    <div style="width: 100%; height: 0; padding-bottom: 60%; position: relative; margin: auto; background-color: white; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.2);">
+        <canvas id="studentChart" style="position: absolute; width: 100%; height: 100%; left: 0; top: 0;"></canvas>
+    </div>
+</div>
+
+<!-- Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Responsive Chart Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Create the chart when it comes into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          createChart();
+          observer.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer.observe(document.getElementById("studentChart"));
+
+    function createChart() {
+      const ctx = document.getElementById("studentChart").getContext("2d");
+      
+      // Adjust font sizes based on screen width
+      const isMobile = window.innerWidth < 768;
+      const baseFontSize = isMobile ? 10 : 12;
+      const titleFontSize = isMobile ? 14 : 18;
+      
+      const data = {
+        labels: ["2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027"],
+        datasets: [
+          {
+            label: "Bio-System Technology",
+            data: [14, 23, 9, 11, 14, 10, 27, 17, 0],
+            backgroundColor: "maroon",
+            borderRadius: 5,
+          },
+          {
+            label: "Engineering Technology",
+            data: [4, 17, 14, 20, 14, 24, 37, 17, 0],
+            backgroundColor: "#FF5733",
+            borderRadius: 5,
+          },
+        ],
+      };
+
+      const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 2000,
+          easing: "easeOutQuad",
+        },
+        scales: {
+          x: { 
+            ticks: { 
+              color: "black",
+              font: {
+                size: baseFontSize
+              }
+            },
+            grid: {
+              display: false
+            }
+          },
+          y: { 
+            beginAtZero: true, 
+            ticks: { 
+              color: "black",
+              font: {
+                size: baseFontSize
+              }
+            },
+            grid: {
+              color: 'rgba(0,0,0,0.1)'
+            }
+          },
+        },
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: baseFontSize
+              },
+              boxWidth: 15,
+              padding: isMobile ? 5 : 10
+            },
+            position: 'top'
+          },
+          title: {
+            display: true,
+            text: "Student Enrollment (2019 - 2027)",
+            color: "maroon",
+            font: { 
+              size: titleFontSize, 
+              weight: "bold" 
+            },
+            padding: {
+              top: 10,
+              bottom: 15
+            }
+          },
+        },
+      };
+
+      new Chart(ctx, { 
+        type: "bar", 
+        data, 
+        options 
+      });
+    }
+
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        const chart = Chart.getChart("studentChart");
+        if (chart) {
+          chart.destroy();
+          createChart();
+        }
+      }, 200);
+    });
+  });
+</script>
+
+     <!-- Footer -->
+     <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>OVC TECH</h3>
+                <p>The Technology Unit of T/Orrshil Vivekananda College, dedicated to excellence in technical education and university placements.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="/home/index.html">Home</a>
+                <a href="#">About Us</a>
+                <a href="/uni entrance/uni.html">University Entrance</a>
+                <a href="/our projects/test.html">Our Projects</a>
+                <a href="/our events/events.html">Events</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Trincomalee, Sri Lanka</p>
+                <p><i class="fas fa-phone"></i> +94 123 456 789</p>
+                <p><i class="fas fa-envelope"></i> contact@ovctech.edu</p>
+            </div>
+        </div>
+        
+        
+        <div class="copyright">
+            &copy; 2025 OVC TECH. All Rights Reserved.
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <button id="musicToggle">
+            <i class="fas fa-music"></i>
+        </button>
+        <div class="music-info">Background Music</div>
+        <audio id="bgMusic" loop>
+            <source src="/enthiran.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Auto Scrolling
+        let scrollSpeed = 1; // pixels per frame
+        let isScrolling = false;
+        let scrollInterval;
+        
+        function startAutoScroll() {
+            if (!isScrolling) {
+                isScrolling = true;
+                scrollInterval = setInterval(() => {
+                    window.scrollBy(0, scrollSpeed);
+                    // Stop when reaching bottom
+                    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                        stopAutoScroll();
+                    }
+                }, 20);
+            }
+        }
+        
+        function stopAutoScroll() {
+            isScrolling = false;
+            clearInterval(scrollInterval);
+        }
+        
+        // Toggle auto scroll when clicking anywhere
+        document.addEventListener('click', function() {
+            if (isScrolling) {
+                stopAutoScroll();
+            } else {
+                startAutoScroll();
+            }
+        });
+        
+        // Scroll progress indicator
+        window.addEventListener('scroll', function() {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrolled = (scrollTop / (documentHeight - windowHeight)) * 100;
+            scrollProgress.style.width = scrolled + '%';
+        });
+        
+        // Background Music
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        let isMusicPlaying = false;
+        
+        // Check if music was playing before page refresh
+        if (localStorage.getItem('musicPlaying') === 'true') {
+            bgMusic.play();
+            isMusicPlaying = true;
+            musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+        }
+        
+        musicToggle.addEventListener('click', function() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicToggle.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                bgMusic.play();
+                musicToggle.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+            isMusicPlaying = !isMusicPlaying;
+            localStorage.setItem('musicPlaying', isMusicPlaying);
+        });
+        
+        // Play music when about page is opened (simulated)
+        window.addEventListener('load', function() {
+            // This would be triggered when the about page loads
+            // For demo, we'll just show an alert
+            console.log("About page loaded - music could play here");
+        });
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight - 100) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Initialize sections with hidden state
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+
+
+
+</body>
+</html>

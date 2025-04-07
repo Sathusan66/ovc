@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technology Unit - T/Orrshil Vivekananda College</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    
+    <style>
+        /* Base responsive styles */
+        body {
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        
+        
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .modal-content button {
+            background: #d32f2f;
+            background: linear-gradient(to right, #5a0000, maroon);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .modal-content button:hover {
+            background: #b71c1c;
+        }
+
+        @keyframes fadeIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Navbar styles with hover effects */
+        .navbar-brand img { 
+            height: 40px;
+            width: auto;
+            transition: transform 0.3s;
+        }
+        
+        @media (max-width: 576px) {
+            .navbar-brand img {
+                height: 30px;
+            }
+        }
+
+        .navbar-brand img:hover { 
+            transform: scale(1.1);
+        }
+
+        .logo-text {
+            font-family: 'MyCustomFont', sans-serif;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover .logo-text {
+            color: #ffcc00 !important;
+        }
+
+        /* Nav menu hover effects */
+        .navbar-nav .nav-link {
+            position: relative;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00 !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #ffcc00;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .hero video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 0 15px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        /* Dynamic Theme Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            
+            animation: gradientMove 10s infinite alternate ease-in-out;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        /* Animated Heading */
+        .heading-container {
+            margin-top: 5px;
+            font-size: 50px;
+            font-weight: bold;
+            color: rgb(255, 255, 255);
+            text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.8);
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            padding: 0 15px;
+            transition: text-shadow 0.3s ease;
+        }
+
+        .heading-container:hover {
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            .heading-container {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .heading-container {
+                font-size: 1.5rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Buttons */
+        .btn-theme {
+            background-color: rgb(95,11, 11);
+            background: linear-gradient(to right, #5a0000, maroon);
+            color: white;
+            border-radius: 25px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+            border: 2px solid transparent;
+            font-weight: bold;
+        }
+
+        .btn-theme:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            background-color: transparent;
+            border-color: white;
+            color: white;
+        }
+
+        /* Color themes */
+        .bg-danger {  background: linear-gradient(to right, #5a0000, maroon);  }
+        .text-danger { color: rgb(95, 11, 11) !important; }
+
+        /* Diagram section */
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 10px;
+        }
+
+        .t1 {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bolder;
+            color: #5a0000;
+            text-align: center;
+            font-size: 2rem;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .t1:hover {
+            color: #8b0000;
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .t1 {
+                font-size: 1.5rem;
+            }
+        }
+/* Diagram section - Updated animations */
+.diagram-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+    overflow: hidden;
+    
+}
+
+.t1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    color: #5a0000;
+    text-align: center;
+    font-size: 2rem;
+    margin: 20px 0;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.t1:hover {
+    color: #8b0000;
+    transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .t1 {
+        font-size: 1.5rem;
+    }
+}
+
+.diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(95, 11, 11);
+    background: linear-gradient(to right, #5a0000, maroon);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 15px 0;
+    width: 100%;
+    max-width: 1300px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-100px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.diagram:nth-child(even) {
+    transform: translateX(100px);
+}
+
+.diagram.animate {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.diagram:hover {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px) translateX(0) !important;
+}
+
+@media (min-width: 768px) {
+    .diagram {
+        flex-direction: row;
+        height: auto;
+    }
+    
+    .diagram:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+}
+
+.diagram img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin: 0 0 15px 0;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+    transform: scale(0.95);
+}
+
+.diagram.animate img {
+    transform: scale(1);
+}
+
+.diagram:hover img {
+    transform: scale(1.05) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 768px) {
+    .diagram img {
+        margin: 0 20px 0 0;
+        width: 350px;
+    }
+    
+    .diagram:nth-child(even) img {
+        margin: 0 0 0 20px;
+    }
+}
+
+.diagram-text {
+    font-size: 1rem;
+    flex: 1;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.diagram.animate .diagram-text {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+.diagram:hover .diagram-text {
+    transform: scale(1.02) translateY(0) !important;
+}
+
+.diagram h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+    color: #ffcc00;
+    font-weight: bolder;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.diagram:hover h3 {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255,204,0,0.7);
+}
+        /* Stats section */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px 20px;
+            background: linear-gradient(to right, #5a0000, maroon);
+            text-align: center;
+        }
+
+        .stat-box {
+            background: white;
+            color: rgb(95, 11, 11);
+            padding: 20px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 250px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover .stat-icon {
+            transform: scale(1.2);
+        }
+
+        .stat-box h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        .stat-box:hover h2 {
+            color: #8b0000;
+        }
+
+        .stat-box p {
+            font-size: 1rem;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        /* Tech cards section */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: maroon;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+        }
+
+        .section-title:hover {
+            color: #8b0000;
+            transform: scale(1.02);
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        .tech-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            perspective: 1000px;
+        }
+
+        .tech-card {
+            position: relative;
+            width: 100%;
+            max-width: 250px;
+            height: 300px;
+            background: rgb(95, 11, 11);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px) rotateY(20deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .tech-card .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(128, 0, 0, 0.6);
+            border-radius: 15px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover .overlay {
+            opacity: 1;
+            background: rgba(128, 0, 0, 0.8);
+        }
+
+        .tech-card img {
+            width: 100%;
+            height: 70%;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            transition: all 0.5s ease;
+        }
+
+        .tech-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .tech-card h3 {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            padding: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover h3 {
+            transform: scale(1.1);
+            color: #ffcc00;
+        }
+
+        /* Teachers section */
+        .teachers-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .teacher-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+            transition: all 0.3s ease;
+        }
+
+        .teacher-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .teacher-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .teacher-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        @media (min-width: 768px) {
+            .teacher-card {
+                width: 140px;
+                height: 140px;
+            }
+        }
+
+        .teacher-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .teacher-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .teacher-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .teacher-name {
+            text-align: center;
+            color: maroon;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            width: 100%;
+            transition: color 0.3s ease;
+        }
+
+        .teacher-wrapper:hover .teacher-name {
+            color: #8b0000;
+        }
+
+        .tn {
+            font-weight: bold;
+            color: black;
+            margin-top: 0;
+        }
+
+        /* Events & Projects section */
+        .events-projects {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to right, #5a0000, maroon);
+            color: white;
+        }
+
+        .events-projects h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .events-projects h2:hover {
+            transform: scale(1.02);
+            color: #ffcc00;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .slider-container:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            max-height: 310px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.5s ease;
+        }
+
+        .slide:hover img {
+            transform: scale(1.02);
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.6);
+            color: maroon;
+            font-size: 24px;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .prev:hover, .next:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev { left: 10px; }
+        .next { right: 10px; }
+
+        .custom-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: white;
+            color: maroon;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            border: 2px solid transparent;
+        }
+
+        .custom-btn:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px 0;
+        }
+
+        footer h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+            font-weight: bolder;
+           
+        }
+
+        footer h3:hover {
+            color: #ffcc00;
+        }
+
+        footer p, footer a {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffcc00 !important;
+        }
+
+        footer .fab {
+            font-size: 1.5rem;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+        }
+
+        footer .fab:hover {
+            transform: translateY(-5px) scale(1.2);
+            color: #ffcc00 !important;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .animate__slideInLeft {
+            animation: slideInLeft 1s ease-in-out;
+        }
+
+        .animate__slideInRight {
+            animation: slideInRight 1s ease-in-out;
+        }
+        .logo-text{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bolder;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgb(95, 11, 11);
+            color: var(--white);
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+        
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #bbb;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--gold);
+            color: #222;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+         /* Base Styles */
+         :root {
+            --maroon: #5a0000;
+            --light-maroon: #8b0000;
+            --gold: #ffcc00;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+        }
+        /* Previous styles remain the same until the stats section */
+        
+        /* Updated Stats section */
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #5a0000, maroon);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="2"><path d="M0 0 L100 100 M100 0 L0 100" /></svg>');
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .stat-box {
+            background: white;
+            color: rgb(95, 11, 11);
+            padding: 30px 20px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .stat-box::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 204, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .stat-box:hover::before {
+            opacity: 1;
+            animation: shine 1.5s;
+        }
+
+        @keyframes shine {
+            0% { left: -50%; }
+            100% { left: 150%; }
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: maroon;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .stat-icon::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: maroon;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover .stat-icon {
+            color: #8b0000;
+            transform: scale(1.1);
+        }
+
+        .stat-box:hover .stat-icon::after {
+            width: 50px;
+            background: #ffcc00;
+        }
+
+        .stat-box h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            transition: color 0.3s ease;
+            background: linear-gradient(to right, #5a0000, maroon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-box:hover h2 {
+            background: linear-gradient(to right, #8b0000, #5a0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-box p {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #5a0000;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover p {
+            color: #8b0000;
+            transform: translateY(2px);
+        }
+
+        /* Rest of your existing styles remain the same */
+
+        
+    </style>
+</head>
+<body>
+    <!-- Modal Structure -->
+    <div id="popup-modal" class="modal">
+        <div class="modal-content">
+            <h2>Hi Techies</h2>
+            <p>Welcome to Our Technology Unit!</p>
+            <button id="close-modal">Got It!</button>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger p-1">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="/img/T_Orr's Hill Vivekananda College 40th profile pic.png" alt="School Logo" class="logo">
+                <span class="logo-text">OVC TECH</span> 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="/home/index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/about/about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/uni entrance/uni.html">Uni Entrance</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/our projects/test.html">Our Projects</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/our events/events.html">Events</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/garden/garden.html">GS</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/lms/LMS.html">LMS</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline>
+            <source src="/video/Firefly Create a time-lapse of a building's evolution, starting from an empty plot of land to a full.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-content">
+            <!-- Theme Overlay -->
+            <div class="overlay"></div>
+            
+            <!-- Auto-looping Heading -->
+            <h1 class="heading-container" id="animatedHeading">Innovate the Future with Technology</h1>
+            
+            <a href="/about/about.html" class="btn btn-theme">Explore The Tech</a>
+        </div>
+    </section>
+
+    <div class="diagram-container">
+        <h1 class="t1">A New Era Began Technology Unleashed!</h1>
+        
+        <!-- Engineering Technology Diagram -->
+        <div class="diagram animate__animated animate__slideInLeft">
+            <img src="/img/1.jpg" alt="Engineering Technology Diagram">
+            <div class="diagram-text">
+                <h3> The Foundation of Our Technology Unit</h3>
+                <p>The Technology Unit of T/Orr’s Hill Vivekananda College stands as a symbol of progress, innovation, and dedication to education. Laid on a strong foundation, our unit was officially inaugurated through the vision and leadership of  
+                    R. Sampanthan MP and K. Thurairetnasingham MP, who laid the foundation stone for this initiative. From the very beginning, our mission has been to bridge technology with real-world solutions, empowering students with knowledge and practical skills. One of our most innovative projects, the Seed Ball Initiative, reflects our commitment to sustainability and eco-friendly technology. Through this project, we integrate science and environmental responsibility, creating a greener tomorrow with technology driven solutions. Our journey continues with unwavering passion, inspiring future generations to explore, innovate, and transform ideas into reality.</p>
+            </div>
+        </div>
+        
+        <!-- Bio-System Technology Diagram -->
+        <div class="diagram animate__animated animate__slideInRight">
+            <img src="/img/486690210_10235295614948910_2295363982287112265_n.jpg" alt="Bio-System Technology Diagram">
+            <div class="diagram-text">
+                <h3>  Housewarming Ceremony of Our Technology Unit</h3>
+                <p>The opening of the Technology Unit at T/Orr’s Hill Vivekananda College was marked by a heartfelt and traditional housewarming ceremony, deeply rooted in Tamil cultural values. The event symbolized not just the beginning of an academic journey, but also the spiritual and cultural foundation of our unit. With the aroma of incense, the lighting of the Kuthu Vilakku (traditional oil lamp), and the recitation of blessings and prayers, the ceremony embraced the rich heritage of our community. Traditional music, offerings, and rituals were performed with great devotion, seeking prosperity, wisdom, and positive energy for the future of our students and staff. This celebration was a beautiful reminder that while we grow in technology and innovation, we remain grounded in our cultural roots and respect for tradition.
+
+                </p>
+            </div>
+        </div>
+
+        <div class="diagram animate__animated animate__slideInLeft">
+            <img src="/img/opening.jpg" alt="Engineering Technology Diagram">
+            <div class="diagram-text">
+                <h3>Official Opening  A Proud Milestone in Our Journey</h3>
+                <p>The Technology Unit of T/Orr’s Hill Vivekananda College was officially declared open by Mr. K. Thurairetnasingham MP, marking a significant milestone in the history of our institution. This proud moment took place during the dedicated leadership of our honorable principal, Mr. K. Ravithas Sir, whose unwavering commitment to academic excellence and student empowerment played a vital role in making this dream a reality. The opening ceremony was not just an event, but a celebration of vision, hard work, and a strong belief in the power of education and technology. With the blessings of our leaders and the support of our community, our Technology Unit was born a space where creativity meets innovation, and young minds are nurtured to become futureready technologists.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Updated Number Counting Section -->
+    <section class="stats-container">
+        <div class="stat-box">
+            <div class="stat-icon"><i class="fas fa-user-graduate"></i></div>
+            <h2 class="counter" data-target="500">0</h2>
+            <p>Studied Students</p>
+        </div>
+        <div class="stat-box">
+            <div class="stat-icon"><i class="fas fa-award"></i></div>
+            <h2 class="counter" data-target="100">0</h2>
+            <p>Pass Out Students</p>
+        </div>
+        <div class="stat-box">
+            <div class="stat-icon"><i class="fas fa-university"></i></div>
+            <h2 class="counter" data-target="21">0</h2>
+            <p>University Entrances</p>
+        </div>
+        <div class="stat-box">
+            <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+            <h2 class="counter" data-target="6">0</h2>
+            <p>Teachers</p>
+        </div>
+    </section>
+
+    
+    <br>
+    <h2 class="section-title">Our Stream Subjects</h2>
+    <br><br><br><br>
+    <div class="tech-container">
+        <div class="tech-card">
+            <div class="overlay"></div>
+            <img src="/img/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTEwL3Jhd3BpeGVsX29mZmljZV8zMl9taW5pbWFsX3Bob3RvX29mX21hbGVfZW5naW5lZXJfd29ya2luZ193aXRoX182YjI0MzFmMy1lYjMyLTRjMmUtOTQ5Mi1mMjZlYTYzYjA1YWNfMS5qcGc.jpg" alt="Tech Element 1">
+            <h3>Engineering Technology</h3>
+        </div>
+    
+        <div class="tech-card">
+            <div class="overlay"></div>
+            <img src="/img/bio.jpg" alt="Tech Element 2">
+            <h3>Bio-System Technology</h3>
+        </div>
+    
+        <div class="tech-card">
+            <div class="overlay"></div>
+            <img src="/img/OIP (1).jpeg" alt="Tech Element 3">
+            <h3>ICT</h3>
+        </div>
+        <div class="tech-card">
+            <div class="overlay"></div>
+            <img src="/img/agri.jpeg" alt="Tech Element 4">
+            <h3>Agriculture</h3>
+        </div>
+        
+        
+    </div><br><br><br><br>
+    <br>
+    <!-- Our Events & Projects Section -->
+    <section class="events-projects">
+        
+        <h2>Our Events</h2>
+        
+        
+        <!-- Events Slider -->
+        <div class="slider-container">
+            <button class="prev" onclick="prevSlide('events')">&#10094;</button>
+            <div class="slider" id="events-slider">
+                <div class="slide"><img src="/events img/1.jpg" alt="Event 1"></div>
+                <div class="slide"><img src="/events img/2.jpg" alt="Event 2"></div>
+                <div class="slide"><img src="/events img/7.jpg" alt="Event 3"></div>
+            </div>
+            <button class="next" onclick="nextSlide('events')">&#10095;</button>
+        </div>
+
+        <!-- Button to View More Events -->
+        <a href="/our events/events.html" class="custom-btn">View Events</a>
+
+        <h2>Our Projects</h2>
+
+        <!-- Projects Slider -->
+        <div class="slider-container">
+            <button class="prev" onclick="prevSlide('projects')">&#10094;</button>
+            <div class="slider" id="projects-slider">
+                <div class="slide"><img src="/our proj img/1.0jpg.jpg" alt="Project 1"></div>
+                <div class="slide"><img src="/our proj img/2.jpg" alt="Project 2"></div>
+                <div class="slide"><img src="/our proj img/3.jpg" alt="Project 3"></div>
+            </div>
+            <button class="next" onclick="nextSlide('projects')">&#10095;</button>
+        </div>
+
+        <!-- Button to View More Projects -->
+        <a href="/our projects/test.html" class="custom-btn">View Projects</a>
+    </section>
+     
+    
+
+    
+
+    <h2 class="section-title">Academic Staff Of Technology Stream</h2>
+
+    <div class="teachers-container">
+        <!-- Teacher 1 -->
+        <div class="teacher-wrapper">
+            <div class="teacher-card"><img src="/img/techers/1.jpg" alt="Teacher 1"></div>
+            <p class="teacher-name">principal</p>
+            <p class="teacher-name tn">P.Puvaneswaran</p>
+        </div>
+        <!-- Teacher 2 -->
+        <div class="teacher-wrapper">
+            <div class="teacher-card"><img src="/img/techers/2.jpg" alt="Teacher 2"></div>
+            <p class="teacher-name">Vice Principal</p>
+            <p class="teacher-name tn">Mrs.Vishnukumar</p>
+        </div>
+        <!-- Teacher 3 -->
+        <div class="teacher-wrapper">
+            <div class="teacher-card"><img src="/img/techers/3.jpg" alt="Teacher 3"></div>
+            <p class="teacher-name">Deputy Principal</p>
+            <p class="teacher-name tn">Mrs.S.Chandrabawan</p>
+        </div>
+        <!-- Teacher 4 -->
+        <div class="teacher-wrapper">
+            <div class="teacher-card"><img src="/img/techers/4.jpg" alt="Teacher 4"></div>
+            <p class="teacher-name">Deputy Principal</p>
+            <p class="teacher-name tn">Mrs.C.Soundararajan</p>
+        </div>
+        <!-- Teacher 5 -->
+        <div class="teacher-wrapper">
+            <div class="teacher-card"><img src="/img/techers/5.jpg" alt="Teacher 5"></div>
+            <p class="teacher-name">Sectional Head</p>
+            <p class="teacher-name tn">Mrs.Shoba Subas</p>
+        </div>
+        <!-- Teacher 6 -->
+        <div class="teacher-wrapper">
+            <div class="teacher-card"><img src="/img/techers/6.jpg" alt="Teacher 6"></div>
+            <p class="teacher-name">Agriculture Teacher</p>
+            <p class="teacher-name tn">Mrs.P.Umamahesan</p>
+        </div>
+        <!-- Teacher 7 -->
+        <div class="teacher-wrapper">
+            <div class="teacher-card"><img src="/img/techers/7.jpg" alt="Teacher 7"></div>
+            <p class="teacher-name">BST Teacher</p>
+            <p class="teacher-name tn">Mr.S.Sivashankaran</p>
+        </div>
+        <!-- Teacher 8 -->
+        <div class="teacher-wrapper">
+            <div class="teacher-card"><img src="/img/techers/8.jpg" alt="Teacher 8"></div>
+            <p class="teacher-name">E.Tech Teacher</p>
+            <p class="teacher-name tn">Mr.A.Mujahith</p>
+        </div>
+        <!-- Teacher 9 -->
+        <div class="teacher-wrapper">
+            <div class="teacher-card"><img src="/img/techers/9.jpg" alt="Teacher 9"></div>
+            <p class="teacher-name">ICT Teacher</p>
+            <p class="teacher-name tn">Mrs.S.Baheerathy</p>
+        </div>
+    </div>
+
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>OVC TECH</h3>
+                <p>The Technology Unit of T/Orrshil Vivekananda College, dedicated to excellence in technical education and university placements.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="/home/index.html">Home</a>
+                <a href="/about/about.html">About Us</a>
+                <a href="/uni entrance/uni.html">University Entrance</a>
+                <a href="/our projects/test.html">Our Projects</a>
+                <a href="/our events/events.html">Events</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Trincomalee, Sri Lanka</p>
+                <p><i class="fas fa-phone"></i> +94 123 456 789</p>
+                <p><i class="fas fa-envelope"></i> contact@ovctech.edu</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 OVC TECH. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Modal functionality
+        document.addEventListener("DOMContentLoaded", function () {
+            let modal = document.getElementById("popup-modal");
+            let closeModal = document.getElementById("close-modal");
+
+            // Show modal only on the first visit
+            if (!sessionStorage.getItem("visited")) {
+                modal.style.visibility = "visible";
+                modal.style.opacity = "1";
+            }
+
+            closeModal.addEventListener("click", function () {
+                modal.style.opacity = "0";
+                setTimeout(() => {
+                    modal.style.visibility = "hidden";
+                }, 300);
+                sessionStorage.setItem("visited", "true");
+            });
+
+            // Auto-looping Headings
+            const headings = [
+                "Building Tomorrow with Tech",
+                "Empowering Minds with Knowledge",
+                "Revolutionizing the Digital World"
+            ];
+
+            let currentIndex = 0;
+            const headingElement = document.getElementById("animatedHeading");
+
+            function changeHeading() {
+                headingElement.style.opacity = "0";
+                setTimeout(() => {
+                    headingElement.textContent = headings[currentIndex];
+                    headingElement.style.opacity = "1";
+                    currentIndex = (currentIndex + 1) % headings.length;
+                }, 500);
+            }
+
+            setInterval(changeHeading, 3000);
+
+            // Number counting animation
+            let counters = document.querySelectorAll(".counter");
+
+            const startCounting = () => {
+                counters.forEach(counter => {
+                    counter.innerText = "0";
+                    let target = +counter.getAttribute("data-target");
+                    let step = target / 100;
+
+                    const updateCount = () => {
+                        let current = +counter.innerText;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current + step);
+                            setTimeout(updateCount, 25);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            // Trigger animation when in view
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startCounting();
+                        observer.disconnect();
+                    }
+                });
+            });
+
+            observer.observe(document.querySelector(".stats-container"));
+
+            // Slider functionality
+            function initSlider(sliderId) {
+                let index = 0;
+                const slider = document.getElementById(sliderId);
+                const slides = slider.children;
+                
+                function showSlide(newIndex) {
+                    if (newIndex < 0) index = slides.length - 1;
+                    else if (newIndex >= slides.length) index = 0;
+                    else index = newIndex;
+                    
+                    const offset = -index * 100;
+                    slider.style.transform = `translateX(${offset}%)`;
+                }
+
+                function next() { showSlide(index + 1); }
+                function prev() { showSlide(index - 1); }
+
+                let interval = setInterval(next, 3000);
+
+                // Pause on hover
+                slider.parentElement.addEventListener('mouseenter', () => clearInterval(interval));
+                slider.parentElement.addEventListener('mouseleave', () => {
+                    interval = setInterval(next, 3000);
+                });
+
+                return { next, prev };
+            }
+
+            // Initialize sliders
+            const eventSlider = initSlider("events-slider");
+            const projectSlider = initSlider("projects-slider");
+
+            // Next/Prev Buttons
+            function nextSlide(type) {
+                if (type === "events") eventSlider.next();
+                else if (type === "projects") projectSlider.next();
+            }
+
+            function prevSlide(type) {
+                if (type === "events") eventSlider.prev();
+                else if (type === "projects") projectSlider.prev();
+            }
+
+            // Teacher cards animation
+            function revealTeachers() {
+                let cards = document.querySelectorAll(".teacher-card");
+                cards.forEach((card, index) => {
+                    let position = card.getBoundingClientRect().top;
+                    let screenPosition = window.innerHeight / 1.3;
+
+                    if (position < screenPosition) {
+                        setTimeout(() => {
+                            card.classList.add("show");
+                        }, index * 150);
+                    }
+                });
+            }
+            window.addEventListener("scroll", revealTeachers);
+            revealTeachers(); // Check on load in case some are already visible
+        });
+
+        // Diagram animation observer
+const diagrams = document.querySelectorAll('.diagram');
+const t1 = document.querySelector('.t1');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            if (entry.target === t1) {
+                entry.target.style.animation = 'fadeInUp 1s ease-out forwards';
+            } else {
+                entry.target.classList.add('animate');
+            }
+            observer.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+});
+
+// Observe the title
+if (t1) {
+    observer.observe(t1);
+}
+
+// Observe all diagrams
+diagrams.forEach(diagram => {
+    observer.observe(diagram);
+});
+    </script>
+
+    <!-- Rest of your HTML content remains the same -->
+
+    
+</body>
+</html>

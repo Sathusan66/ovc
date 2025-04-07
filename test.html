@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects | OVC TECH</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Global Styling */
+        :root {
+            --maroon: #5a0000;
+            --light-maroon: #8b0000;
+            --white: #ffffff;
+            --off-white: #f9f9f9;
+            --gold: #ffcc00;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--off-white);
+            color: #333;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Dynamic Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--off-white), var(--maroon));
+            animation: overlayTransition 8s infinite alternate;
+            z-index: -2;
+            opacity: 0.8;
+        }
+
+        @keyframes overlayTransition {
+            0% { background: linear-gradient(135deg, var(--off-white), var(--maroon)); }
+            50% { background: linear-gradient(135deg, var(--maroon), var(--off-white)); }
+            100% { background: linear-gradient(135deg, var(--off-white), var(--maroon)); }
+        }
+
+        /* Home Button */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: var(--maroon);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0px 4px 15px rgba(90, 0, 0, 0.3);
+            z-index: 100;
+            border: 2px solid transparent;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .home-btn:hover {
+            background-color: var(--white);
+            color: var(--maroon);
+            border-color: var(--maroon);
+            transform: translateY(-3px);
+            box-shadow: 0px 6px 20px rgba(90, 0, 0, 0.4);
+        }
+
+        /* Year Display */
+        .year-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--maroon);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 20px;
+            border-radius: 50px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease-out;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .year-display::before {
+            content: 'Year:';
+            font-size: 0.7rem;
+            display: block;
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--maroon);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 15px;
+            font-weight: normal;
+        }
+
+        /* Projects Section */
+        .projects-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 15px;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .section-title h1 {
+            font-size: 2rem;
+            color: var(--maroon);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--maroon);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Project Cards */
+        .project-card {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 25px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(50px) scale(0.95);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: var(--white);
+            border: 2px solid var(--maroon);
+            z-index: 1;
+        }
+
+        .project-card.show {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(90,0,0,0.1), rgba(90,0,0,0.3));
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-img-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-img-container::before {
+            content: "Project Image";
+            color: #999;
+            font-size: 1rem;
+            position: absolute;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            position: relative;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Project Overlay - Fixed to remove scrollbar */
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(90, 0, 0, 0.9);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            transform: translateY(100%);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2;
+            box-sizing: border-box;
+            overflow: hidden; /* Changed from auto to hidden */
+            max-height: 100%;
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+        }
+
+        .project-overlay-content {
+            max-height: calc(100% - 40px);
+            overflow: hidden;
+        }
+
+        .project-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--gold);
+        }
+
+        .project-overlay p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            padding: 0 10px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 6; /* Limit to 6 lines */
+            -webkit-box-orient: vertical;
+        }
+
+        .project-overlay .trophy {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        .project-year {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--maroon);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .project-year {
+            transform: scale(1.1) rotate(15deg);
+            background: var(--light-maroon);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 576px) {
+            .home-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .year-display {
+                font-size: 1.8rem;
+                padding: 10px 25px;
+                min-width: 120px;
+            }
+            
+            .section-title h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title p {
+                font-size: 1.1rem;
+            }
+            
+            .project-img-container {
+                height: 300px;
+            }
+            
+            .project-overlay h3 {
+                font-size: 1.8rem;
+            }
+            
+            .project-overlay p {
+                font-size: 1rem;
+                -webkit-line-clamp: 8; /* More lines on larger screens */
+            }
+            
+            .project-year {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .projects-container {
+                padding: 100px 20px;
+            }
+            
+            .section-title h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title p {
+                font-size: 1.2rem;
+            }
+            
+            .project-img-container {
+                height: 350px;
+            }
+            
+            .project-overlay {
+                padding: 25px;
+            }
+            
+            .project-overlay h3 {
+                font-size: 2rem;
+                margin-bottom: 20px;
+            }
+            
+            .project-overlay p {
+                margin-bottom: 20px;
+                padding: 0 20px;
+                -webkit-line-clamp: 10;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .project-img-container {
+                height: 400px;
+            }
+            
+            .project-overlay h3 {
+                font-size: 2.2rem;
+                margin-bottom: 25px;
+            }
+            
+            .project-overlay p {
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+                padding: 0 30px;
+                -webkit-line-clamp: 12;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: rgb(95, 11, 11);
+            color: var(--white);
+            padding: 50px 20px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+        
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #bbb;
+            margin-bottom: 10px;
+            display: block;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--gold);
+            color: #222;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Home Button -->
+    <a href="/home/index.html" class="home-btn"><i class="fas fa-home"></i> Home</a>
+
+    <!-- Year Display -->
+    <div class="year-display" id="yearDisplay">2019</div>
+
+    <!-- Projects Section -->
+    <div class="projects-container">
+        <div class="section-title">
+            <h1>Our Technology Projects</h1>
+            <p>Explore our innovative projects from different years that showcase our students' technical expertise and creativity</p>
+        </div>
+
+        <div class="project-card" data-year="2020">
+            <div class="project-year">2020</div>
+            <div class="project-img-container">
+                <!-- Fixed image path - use absolute or correct relative path -->
+                <img src="/our proj img/2020.jpg" alt="Seeds Ball Project 2020" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Seeds Ball</h3>
+                    <p>We proudly present our innovative project: Seed Balls Nature's Gift, Reimagined Through Technology. This eco-friendly initiative is designed to promote sustainable reforestation using organic methods. By combining traditional wisdom with modern scientific thinking, our students create seed balls using native seeds and natural compost, allowing vegetation to grow even in harsh and barren lands.</p>
+                    <p>This project reflects our commitment to environmental protection, sustainability, and the use of technology to make a positive impact on the world. Through this initiative, we aim to inspire young minds to think green and act responsibly because even a small seed can spark a big change.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2020">
+            <div class="project-year">2020</div>
+            <div class="project-img-container">
+                <img src="/our proj img/20/1.jpg" alt="Renewable Energy Project 2020" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Renewable Energy</h3>
+                    <p>Innovating solar and wind energy solutions with IoT monitoring systems for efficient power management.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Featured in National Energy Conference 2020</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2020">
+            <div class="project-year">2020</div>
+            <div class="project-img-container">
+                <img src="/our proj img/20/2.jpg" alt="Renewable Energy Project 2020" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Renewable Energy</h3>
+                    <p>Innovating solar and wind energy solutions with IoT monitoring systems for efficient power management.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Featured in National Energy Conference 2020</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2021">
+            <div class="project-year">2021</div>
+            <div class="project-img-container">
+                <img src="/our proj img/21/1.jpg" alt="IoT Smart Home Project 2021" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>IoT Smart Home</h3>
+                    <p>Creating a fully automated home environment with IoT technology and voice-controlled systems.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Best Student Project Award 2021</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2021">
+            <div class="project-year">2021</div>
+            <div class="project-img-container">
+                <img src="/our proj img/21/2.jpg" alt="IoT Smart Home Project 2021" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>IoT Smart Home</h3>
+                    <p>Creating a fully automated home environment with IoT technology and voice-controlled systems.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Best Student Project Award 2021</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2021">
+            <div class="project-year">2021</div>
+            <div class="project-img-container">
+                <img src="/our proj img/21/3.jpg" alt="IoT Smart Home Project 2021" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>IoT Smart Home</h3>
+                    <p>Creating a fully automated home environment with IoT technology and voice-controlled systems.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Best Student Project Award 2021</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2021">
+            <div class="project-year">2021</div>
+            <div class="project-img-container">
+                <img src="/our proj img/21/4.jpg" alt="IoT Smart Home Project 2021" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>IoT Smart Home</h3>
+                    <p>Creating a fully automated home environment with IoT technology and voice-controlled systems.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Best Student Project Award 2021</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2022">
+            <div class="project-year">2022</div>
+            <div class="project-img-container">
+                <img src="/our proj img/22/3.jpg" alt="Robotics Project 2022" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Robotics Development</h3>
+                    <p>Building robotic prototypes for industrial automation with computer vision capabilities.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Regional Robotics Competition Winner</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2022">
+            <div class="project-year">2022</div>
+            <div class="project-img-container">
+                <img src="/our proj img/22/1.jpg" alt="Robotics Project 2022" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Robotics Development</h3>
+                    <p>Building robotic prototypes for industrial automation with computer vision capabilities.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Regional Robotics Competition Winner</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="project-card" data-year="2023">
+            <div class="project-year">2023</div>
+            <div class="project-img-container">
+                <img src="/our proj img/23/1.jpg" alt="Blockchain Project 2023" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Blockchain Security</h3>
+                    <p>Exploring secure transaction systems using blockchain technology for financial applications.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> National Blockchain Hackathon Finalist</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2023">
+            <div class="project-year">2023</div>
+            <div class="project-img-container">
+                <img src="/our proj img/23.jpg" alt="Blockchain Project 2023" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Blockchain Security</h3>
+                    <p>Exploring secure transaction systems using blockchain technology for financial applications.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> National Blockchain Hackathon Finalist</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2023">
+            <div class="project-year">2023</div>
+            <div class="project-img-container">
+                <img src="/our proj img/23.jpg" alt="Blockchain Project 2023" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Blockchain Security</h3>
+                    <p>Exploring secure transaction systems using blockchain technology for financial applications.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> National Blockchain Hackathon Finalist</span>
+                </div>
+            </div>
+        </div>
+
+
+
+       
+        <div class="project-card" data-year="2024">
+            <div class="project-year">2024</div>
+            <div class="project-img-container">
+                <img src="/our proj img/24.jpg" alt="Cloud AI Project 2024" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Cloud AI Solutions</h3>
+                    <p>Developing AI-powered cloud security systems with real-time threat detection capabilities.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Currently in development phase</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2024">
+            <div class="project-year">2024</div>
+            <div class="project-img-container">
+                <img src="/our proj img/24.2.jpg" alt="Cloud AI Project 2024" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Cloud AI Solutions</h3>
+                    <p>Developing AI-powered cloud security systems with real-time threat detection capabilities.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Currently in development phase</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2024">
+            <div class="project-year">2024</div>
+            <div class="project-img-container">
+                <img src="/our proj img/24.3.jpg" alt="Cloud AI Project 2024" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Cloud AI Solutions</h3>
+                    <p>Developing AI-powered cloud security systems with real-time threat detection capabilities.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Currently in development phase</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2024">
+            <div class="project-year">2024</div>
+            <div class="project-img-container">
+                <img src="/our proj img/24.4.jpg" alt="Cloud AI Project 2024" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Cloud AI Solutions</h3>
+                    <p>Developing AI-powered cloud security systems with real-time threat detection capabilities.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Currently in development phase</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2024">
+            <div class="project-year">2024</div>
+            <div class="project-img-container">
+                <img src="/our proj img/24.5.jpg" alt="Cloud AI Project 2024" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Cloud AI Solutions</h3>
+                    <p>Developing AI-powered cloud security systems with real-time threat detection capabilities.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Currently in development phase</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2024">
+            <div class="project-year">2024</div>
+            <div class="project-img-container">
+                <img src="/our proj img/24/1.jpg" alt="Cloud AI Project 2024" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Cloud AI Solutions</h3>
+                    <p>Developing AI-powered cloud security systems with real-time threat detection capabilities.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Currently in development phase</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="project-card" data-year="2024">
+            <div class="project-year">2024</div>
+            <div class="project-img-container">
+                <img src="/our proj img/24.7.jpg" alt="Cloud AI Project 2024" onerror="this.style.display='none'">
+            </div>
+            <div class="project-overlay">
+                <div class="project-overlay-content">
+                    <h3>Cloud AI Solutions</h3>
+                    <p>Developing AI-powered cloud security systems with real-time threat detection capabilities.</p>
+                    <span class="trophy"><i class="fas fa-trophy"></i> Currently in development phase</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    
+
+     <!-- Footer -->
+     <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>OVC TECH</h3>
+                <p>The Technology Unit of T/Orrshil Vivekananda College, dedicated to excellence in technical education and university placements.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="/home/index.html">Home</a>
+                <a href="/about/about.html">About Us</a>
+                <a href="/uni entrance/uni.html">University Entrance</a>
+                <a href="/our projects/test.html">Our Projects</a>
+                <a href="/our events/events.html">Events</a>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Trincomalee, Sri Lanka</p>
+                <p><i class="fas fa-phone"></i> +94 123 456 789</p>
+                <p><i class="fas fa-envelope"></i> contact@ovctech.edu</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 OVC TECH. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+
+    <script>
+        // Enhanced Scroll Animation with Year Counter
+        document.addEventListener("DOMContentLoaded", function() {
+            const projectCards = document.querySelectorAll(".project-card");
+            const yearDisplay = document.getElementById("yearDisplay");
+            let currentYear = "2019";
+            let lastScrollPosition = 0;
+            let ticking = false;
+            
+            // Function to update year display with animation
+            function updateYearDisplay(year) {
+                if (year !== currentYear) {
+                    yearDisplay.style.opacity = "0";
+                    yearDisplay.style.transform = "translateY(-20px)";
+                    
+                    setTimeout(() => {
+                        yearDisplay.textContent = year;
+                        yearDisplay.style.opacity = "1";
+                        yearDisplay.style.transform = "translateY(0)";
+                        currentYear = year;
+                    }, 300);
+                }
+            }
+            
+            // Function to check card positions
+            function checkCardPositions() {
+                const windowHeight = window.innerHeight;
+                const scrollPosition = window.scrollY;
+                const scrollDirection = scrollPosition > lastScrollPosition ? "down" : "up";
+                lastScrollPosition = scrollPosition;
+                
+                let activeYear = currentYear;
+                
+                projectCards.forEach(card => {
+                    const cardRect = card.getBoundingClientRect();
+                    const cardTop = cardRect.top;
+                    const cardHeight = cardRect.height;
+                    const cardYear = card.getAttribute("data-year");
+                    
+                    // Check if card is in viewport
+                    if (cardTop < windowHeight * 0.7 && cardTop > -cardHeight * 0.3) {
+                        card.classList.add("show");
+                        
+                        // Determine active year based on scroll direction
+                        if (scrollDirection === "down") {
+                            if (cardTop < windowHeight * 0.4) {
+                                activeYear = cardYear;
+                            }
+                        } else {
+                            if (cardTop < windowHeight * 0.6) {
+                                activeYear = cardYear;
+                            }
+                        }
+                    }
+                });
+                
+                updateYearDisplay(activeYear);
+                ticking = false;
+            }
+            
+            // Throttled scroll event handler
+            window.addEventListener("scroll", function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(checkCardPositions);
+                    ticking = true;
+                }
+            });
+            
+            // Initial check
+            checkCardPositions();
+            
+            // Add smooth hover effect for project cards
+            projectCards.forEach(card => {
+                card.addEventListener("mouseenter", function() {
+                    const year = this.getAttribute("data-year");
+                    updateYearDisplay(year);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
